@@ -4,18 +4,64 @@
     background-size: cover;
     background-position: top;
     background-repeat : no-repeat;
+    color: white;
+    margin-bottom: 0px;
 }
 
 .profil .profil-picture {
 	width: 160px;
 	height: 160px;
-	position: absolute;
-    bottom: 10px;
+    float: left;
 }
 
 .profil .profil-name {
-    position: absolute;
-    right: 40px;
-    bottom: 30px;
-    width: 500px;
+    float: right;
+    color: white;
+    text-rendering: optimizelegibility;
+    text-shadow: 0 0 3px rgba(0,0,0,.8);
 }
+
+@media (min-width: 768px) { 
+    .profil .profil-picture {
+        margin-top: 110px;
+    }
+    .profil .profil-name {
+        margin-top: 190px;
+    }
+}
+
+.profil .media .thumbnail {
+    margin-bottom : 0px;
+}
+
+.profil .playlist iframe {
+    width: 100%;
+    height: 300px;
+}
+
+.profil .flag {
+    width: 40px;
+    height: 40px;
+    display: inline-block;
+    margin-right: 5px;
+}
+
+.profil .movies ul {
+    text-align: center;
+    margin-bottom: -10px;
+}
+.profil .movies li {
+    margin-bottom: 10px;
+}
+.profil .movies li > img {
+    width: 50px;
+    height: 50px;
+}
+.profil .movies li span {
+    display: block;
+}
+
+.profil dd {
+    margin-bottom: 10px;
+}
+

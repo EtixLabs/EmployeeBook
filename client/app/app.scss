@@ -1,5 +1,5 @@
-$icon-font-path: "../bower_components/bootstrap-sass-official/vendor/assets/fonts/bootstrap/";
-@import '../bower_components/bootstrap-sass-official/vendor/assets/stylesheets/bootstrap';
+$icon-font-path: "../bower_components/bootstrap-sass-official/assets/fonts/bootstrap/";
+@import '../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap';
 $fa-font-path: "../bower_components/font-awesome/fonts";
 @import '../bower_components/font-awesome/scss/font-awesome';
 
@@ -14,10 +14,15 @@ $fa-font-path: "../bower_components/font-awesome/fonts";
   padding: 0.2em 0;
 }
 
+body { 
+	padding-top: 60px; 
+}
+
 // Component styles are injected through grunt
 // injector
 @import 'admin/admin.scss';
 @import 'main/main.scss';
+@import 'profil/phoca-flags-selected.scss';
 @import 'profil/profil.scss';
 @import '../components/footer/footer.scss';
 @import '../components/modal/modal.scss';
