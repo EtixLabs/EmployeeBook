@@ -5,8 +5,8 @@
 			<span class="glyphicon glyphicon-globe pull-right" aria-hidden="true"></span>
 		</div>
 		<div class="panel-body">
-			<h5 style="margin: 0 0 10px 0;">Luxembourg</h5>
-			<img class="img-thumbnail img-responsive center-block" src="assets/images/coverdefault.png" alt="" style="max-height: 150px;">
+			<h5 style="margin: 0 0 10px 0;">{{profil.location | profilLocation}}</h5>
+			<img class="img-thumbnail img-responsive center-block" src="assets/images/location/{{profil.location}}.jpg" alt="" style="max-height: 150px;">
 		</div>
 	</div>
 	<div class="panel panel-default">
@@ -15,8 +15,8 @@
 			<span class="glyphicon glyphicon-user pull-right" aria-hidden="true"></span>
 		</div>
 		<div class="panel-body">
-			<p>from <span class="text-primary">Lyon, France</span></p>
-			<p>10 years old</p>
+			<p>from <span class="text-primary">{{profil.hometown}}</span></p>
+			<p><span tooltip="{{profil.birthday | date: 'longDate'}}">{{profil.birthday | ageFilter}} years old</span></p>
 		</div>
 	</div>
 	<div class="panel panel-default">
@@ -25,10 +25,7 @@
 			<span class="glyphicon glyphicon-comment pull-right" aria-hidden="true"></span>
 		</div>
 		<div class="panel-body">
-			<span class="flag fr"></span>
-			<span class="flag gb"></span>
-			<span class="flag it"></span>
-			<span class="flag de"></span>
+			<span class="flag {{lng}}" ng-repeat="lng in profil.languages"></span>
 		</div>
 	</div>
 	<div class="panel panel-default">
@@ -37,7 +34,7 @@
 			<span class="glyphicon glyphicon-education pull-right" aria-hidden="true"></span>
 		</div>
 		<div class="panel-body">
-			Master of information technology - <span class="text-info">SCHOOL</span> - <span class="text-primary">Paris, France</span>
+			{{profil.education.studies}} - <span class="text-primary">{{profil.education.location}}</span>
 		</div>
 	</div>
 	<div class="panel panel-default">
@@ -46,9 +43,10 @@
 			<span class="glyphicon glyphicon-thumbs-up pull-right" aria-hidden="true"></span>
 		</div>
 		<div class="panel-body">
-			Kitesurf, ski, skydive
+			{{profil.interests}}
 		</div>
 	</div>
+	<!-- <div class="panel panel-default movies" ng-show="profil.movies.length"> -->
 	<div class="panel panel-default movies">
 		<div class="panel-heading">
 			Movies

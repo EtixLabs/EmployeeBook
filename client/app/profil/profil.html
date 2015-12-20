@@ -1,5 +1,5 @@
 <navbar></navbar>
-
+<!-- <pre>{{profil | json}}</pre> -->
 <div class="container profil">
 	<div class="row">
 		<div class="col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2">
@@ -11,33 +11,19 @@
 						<div class="panel-heading">Status update</div>
 						<div class="panel-body">
 							<p><strong>Etix everywhere</strong> is thrilled to welcome a new member!</p>
-							<p>{First name Last name} starts on {date} as {position}</p>							
+							<p>{{profil.firstName}} {{profil.lastName}} started on {{profil.startDate | date : 'longDate'}} as {{profil.position}}</p>							
 						</div>
 					</div>
 					<div class="panel panel-default">
 						<div class="panel-heading">About</div>
 						<div class="panel-body">
 							<dl>
-								<dt>Your motto ?</dt>
-								<dd>Lorem ipsum....</dd>
-								<dt>Your personal dream ?</dt>
-								<dd>Lorem ipsum....</dd>
-								<dt>Can you cook? Any specialty ?</dt>
-								<dd>Lorem ipsum....</dd>
-								<dt>What about your family ?</dt>
-								<dd>Lorem ipsum....</dd>
-								<dt>Any Super Power ?</dt>
-								<dd>Lorem ipsum....</dd>
-								<dt>If you had the chance to meet a famous person who would he/she be ?</dt>
-								<dd>Lorem ipsum....</dd>
-								<dt>Which 3 questions would you ask him/her ?</dt>
-								<dd>Lorem ipsum....</dd>
-								<dt>Best trip ever ?</dt>
-								<dd>Lorem ipsum....</dd>
+								<dt ng-repeat-start="q in profil.about">{{q.question.question}}</dt>
+								<dd ng-repeat-end>{{q.answer}}</dd>
 							</dl>
 						</div>
 					</div>
-					<div class="panel panel-default playlist">
+					<div class="panel panel-default playlist" ng-show="profil.playlist">
 						<div class="panel-heading">Playlist</div>
 						<div class="panel-body">
 							<iframe src="https://embed.spotify.com/?uri=spotify%3Auser%3Aqlmhuge%3Aplaylist%3A6Df19VKaShrdWrAnHinwVO" frameborder="0" allowtransparency="true"></iframe>

@@ -3,57 +3,112 @@
  * to disable, edit config/environment/index.js, and set `seedDB: false`
  */
 
-'use strict';
-import Thing from '../api/thing/thing.model';
-import User from '../api/user/user.model';
+ 'use strict';
+ import User from '../api/user/user.model';
+ var Question = require("../api/profil/profil.model").Question;
+ var Profil = require("../api/profil/profil.model").Profil;
+ // import Profil from '../api/profil/profil.model';
+ // import Question from '../api/profil/profil.model';
 
-Thing.find({}).removeAsync()
+ User.find({}).removeAsync()
+ .then(function() {
+  User.createAsync({
+    provider: 'local',
+    name: 'Test User',
+    email: 'test@example.com',
+    password: 'test'
+  }, {
+    provider: 'local',
+    role: 'admin',
+    name: 'Admin',
+    email: 'admin@example.com',
+    password: 'admin'
+  })
   .then(function() {
-    Thing.create({
-      name: 'Development Tools',
-      info: 'Integration with popular tools such as Bower, Grunt, Babel, Karma, ' +
-             'Mocha, JSHint, Node Inspector, Livereload, Protractor, Jade, ' +
-             'Stylus, Sass, and Less.'
-    }, {
-      name: 'Server and Client integration',
-      info: 'Built with a powerful and fun stack: MongoDB, Express, ' +
-             'AngularJS, and Node.'
-    }, {
-      name: 'Smart Build System',
-      info: 'Build system ignores `spec` files, allowing you to keep ' +
-             'tests alongside code. Automatic injection of scripts and ' +
-             'styles into your index.html'
-    }, {
-      name: 'Modular Structure',
-      info: 'Best practice client and server structures allow for more ' +
-             'code reusability and maximum scalability'
-    }, {
-      name: 'Optimized Build',
-      info: 'Build process packs up your templates as a single JavaScript ' +
-             'payload, minifies your scripts/css/images, and rewrites asset ' +
-             'names for caching.'
-    }, {
-      name: 'Deployment Ready',
-      info: 'Easily deploy your app to Heroku or Openshift with the heroku ' +
-             'and openshift subgenerators'
-    });
+    console.log('finished populating users');
   });
+});
 
-User.find({}).removeAsync()
+var questions = [
+  new Question({
+    question: 'Your motto ?'
+  }),
+  new Question({
+    question: 'Your personal dream ?'
+  }),
+  new Question({
+    question: 'Can you cook ? Any specialty ?'
+  }),
+  new Question({
+    question: 'What about your family ?'
+  }),
+  new Question({
+    question: 'Any Super Power ?'
+  }),
+  new Question({
+    question: 'If you had the chance to meet a famous person who would he/she be ?'
+  }),
+  new Question({
+    question: 'Which 3 questions would you ask him/her ?'
+  }),
+  new Question({
+    question: 'Best trip ever ?'
+  })
+ ];
+
+Question.find({}).removeAsync()
+.then(function() {
+  Question.createAsync(questions)
+})
+.then(function() {
+  console.log('finished populating questions');
+});
+
+Profil.find({}).removeAsync()
+.then(function() {
+  Profil.createAsync({
+    firstName: 'Anas',
+    lastName: 'Ait Ali',
+    nickname: 'Prophete',
+    position: 'Lead software engineer',
+    startDate: new Date('01.03.2015'),
+    location: 'lu',
+    hometown: 'Lyon, France',
+    birthday: new Date('01.10.1991 01:00:00'),
+    languages: ['fr', 'gb'],
+    education: {
+      studies: 'Master of information technology - Epitech',
+      location: 'Lyon, France'
+    },
+    interests: 'Kitesurf, ski, skydive',
+    about: [{
+      question: questions[0]._id,
+      answer: 'Lorem ipsum from db'
+    },{
+      question: questions[1]._id,
+      answer: 'Lorem ipsum from db'
+    },{
+      question: questions[2]._id,
+      answer: 'Lorem ipsum from db'
+    },{
+      question: questions[3]._id,
+      answer: 'Lorem ipsum from db'
+    },{
+      question: questions[4]._id,
+      answer: 'Lorem ipsum from db'
+    },{
+      question: questions[5]._id,
+      answer: 'Lorem ipsum from db'
+    },{
+      question: questions[6]._id,
+      answer: 'Lorem ipsum from db'
+    },{
+      question: questions[7]._id,
+      answer: 'Lorem ipsum from db'
+    }],
+    playlist: '<iframe src="https://embed.spotify.com/?uri=spotify%3Auser%3Aspotify_france%3Aplaylist%3A6dBHkT4MaNoBhsQhC1bz4P" width="300" height="380" frameborder="0" allowtransparency="true"></iframe>'
+  })
   .then(function() {
-    User.createAsync({
-      provider: 'local',
-      name: 'Test User',
-      email: 'test@example.com',
-      password: 'test'
-    }, {
-      provider: 'local',
-      role: 'admin',
-      name: 'Admin',
-      email: 'admin@example.com',
-      password: 'admin'
-    })
-    .then(function() {
-      console.log('finished populating users');
-    });
-  });
+    console.log('finished populating profils');
+  })
+});

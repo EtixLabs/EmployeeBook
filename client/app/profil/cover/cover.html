@@ -4,8 +4,8 @@
 			<div class="panel-body cover thumbnail" style="background-image: url('../assets/images/coverdefault.png');">
 				<img class="thumbnail profil-picture" src="assets/images/profildefault.png">
 				<div class="profil-name">
-					<h3>First Name (nickname) Last Name</h3>
-					<h4>Position</h4>
+					<h3>{{profil.firstName}} {{profil.lastName}} <span ng-show="profil.nickname">(aka. {{profil.nickname}})</span></h3>
+					<h4>{{profil.position}}</h4>
 				</div>
 			</div>
 		</div>
