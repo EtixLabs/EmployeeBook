@@ -1,17 +1,16 @@
 /**
  * Using Rails-like standard naming convention for endpoints.
- * GET     /api/profils              ->  index
- * POST    /api/profils              ->  create
- * GET     /api/profils/:id          ->  show
- * PUT     /api/profils/:id          ->  update
- * DELETE  /api/profils/:id          ->  destroy
+ * GET     /api/questions              ->  index
+ * POST    /api/questions              ->  create
+ * GET     /api/questions/:id          ->  show
+ * PUT     /api/questions/:id          ->  update
+ * DELETE  /api/questions/:id          ->  destroy
  */
 
 'use strict';
 
 var _ = require('lodash');
-var Question = require('../question/question.model');
-var Profil = require('./profil.model');
+var Question = require('./question.model');
 
 function handleError(res, statusCode) {
   statusCode = statusCode || 500;
@@ -60,43 +59,43 @@ function removeEntity(res) {
   };
 }
 
-// Gets a list of Profils
+// Gets a list of Questions
 exports.index = function(req, res) {
-  Profil.findAsync()
+  Question.findAsync()
     .then(responseWithResult(res))
     .catch(handleError(res));
 };
 
-// Gets a single Profil from the DB
+// Gets a single Question from the DB
 exports.show = function(req, res) {
-  Profil.findByFriendlyId(req.params.slug)
-    .populate('about.question')
+  Question.findByIdAsync(req.params.id)
     .then(handleEntityNotFound(res))
-    .then(responseWithResult(res));
+    .then(responseWithResult(res))
+    .catch(handleError(res));
 };
 
-// Creates a new Profil in the DB
+// Creates a new Question in the DB
 exports.create = function(req, res) {
-  Profil.createAsync(req.body)
+  Question.createAsync(req.body)
     .then(responseWithResult(res, 201))
     .catch(handleError(res));
 };
 
-// Updates an existing Profil in the DB
+// Updates an existing Question in the DB
 exports.update = function(req, res) {
   if (req.body._id) {
     delete req.body._id;
   }
-  Profil.findByIdAsync(req.params.id)
+  Question.findByIdAsync(req.params.id)
     .then(handleEntityNotFound(res))
     .then(saveUpdates(req.body))
     .then(responseWithResult(res))
     .catch(handleError(res));
 };
 
-// Deletes a Profil from the DB
+// Deletes a Question from the DB
 exports.destroy = function(req, res) {
-  Profil.findByIdAsync(req.params.id)
+  Question.findByIdAsync(req.params.id)
     .then(handleEntityNotFound(res))
     .then(removeEntity(res))
     .catch(handleError(res));

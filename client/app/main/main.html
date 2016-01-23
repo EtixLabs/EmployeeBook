@@ -7,20 +7,29 @@
     <img src="assets/images/yeoman.png" alt="I'm Yeoman">
   </div>
 </header>
- -->
+-->
 <div class="container">
   <div class="row">
-    <div class="col-lg-12">
+    <div class="col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2">
       <!-- <h1 class="page-header">Features:</h1>
       <ul class="nav nav-tabs nav-stacked col-md-4 col-lg-4 col-sm-6" ng-repeat="thing in main.awesomeThings">
         <li><a href="#" tooltip="{{thing.info}}">{{thing.name}}</a></li>
       </ul> -->
-      <ul ng-repeat="profil in main.profils">
-        <li>
-          <a href="/{{profil.slug}}">{{profil.firstName}}</a>
-          <pre>{{profil | json}}</pre>
-        </li>
-      </ul>
+      <div class="row">
+        <div ng-repeat="profil in main.profils">
+          <a href="/profil/{{profil.slug}}">
+            <div class="col-md-3 col-xs-6">
+              <div class="thumbnail">
+                <img src="assets/images/{{profil.image}}" alt="">
+                <div class="caption">
+                  <h5>{{profil.firstName}} {{profil.lastName}}</h5>
+                  <h6>{{profil.position}}</h6>
+                </div>
+              </div>
+            </div>
+          </div>
+        </a>
+      </div>
     </div>
   </div>
 </div>

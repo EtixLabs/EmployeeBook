@@ -5,10 +5,8 @@
 
  'use strict';
  import User from '../api/user/user.model';
- var Question = require("../api/profil/profil.model").Question;
- var Profil = require("../api/profil/profil.model").Profil;
- // import Profil from '../api/profil/profil.model';
- // import Question from '../api/profil/profil.model';
+ import Question from '../api/question/question.model';
+ import Profil from '../api/profil/profil.model';
 
  User.find({}).removeAsync()
  .then(function() {
@@ -107,7 +105,49 @@ Profil.find({}).removeAsync()
       answer: 'Lorem ipsum from db'
     }],
     playlist: '<iframe src="https://embed.spotify.com/?uri=spotify%3Auser%3Aspotify_france%3Aplaylist%3A6dBHkT4MaNoBhsQhC1bz4P" width="300" height="380" frameborder="0" allowtransparency="true"></iframe>'
-  })
+  }, {
+    firstName: 'Jérémy',
+    lastName: 'Letang',
+    nickname: 'Balek',
+    position: 'Lead software engineer',
+    startDate: new Date('01.03.2015'),
+    location: 'lu',
+    hometown: 'Bordeaux, France',
+    birthday: new Date('05.29.1990 01:00:00'),
+    languages: ['fr', 'gb'],
+    education: {
+      studies: 'Master of information technology - Epitech',
+      location: 'Bordeaux, France'
+    },
+    interests: 'Chasse et pêche',
+    about: [{
+      question: questions[0]._id,
+      answer: 'Lorem ipsum from db'
+    },{
+      question: questions[1]._id,
+      answer: 'Lorem ipsum from db'
+    },{
+      question: questions[2]._id,
+      answer: 'Lorem ipsum from db'
+    },{
+      question: questions[3]._id,
+      answer: 'Lorem ipsum from db'
+    },{
+      question: questions[4]._id,
+      answer: 'Lorem ipsum from db'
+    },{
+      question: questions[5]._id,
+      answer: 'Lorem ipsum from db'
+    },{
+      question: questions[6]._id,
+      answer: 'Lorem ipsum from db'
+    },{
+      question: questions[7]._id,
+      answer: 'Lorem ipsum from db'
+    }],
+    playlist: '<iframe src="https://embed.spotify.com/?uri=spotify%3Auser%3Aspotify_france%3Aplaylist%3A6dBHkT4MaNoBhsQhC1bz4P" width="300" height="380" frameborder="0" allowtransparency="true"></iframe>'
+  }
+  )
   .then(function() {
     console.log('finished populating profils');
   })

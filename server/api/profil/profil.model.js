@@ -4,16 +4,13 @@ var mongoose = require('bluebird').promisifyAll(require('mongoose'));
 var Schema = mongoose.Schema,
     ObjectId = Schema.ObjectId;
 
-var QuestionSchema = new Schema({
-	question: String
-});
-var Question = mongoose.model('Question', QuestionSchema);
-
 var ProfilSchema = new Schema({
 	updated: { type: Date, default: Date.now },
 	firstName: { type: String, required: true },
 	lastName: { type: String, required: true },
 	nickname: { type: String, required: false },
+	image: { type: String, required: false, default: 'profildefault.png' },
+	cover: { type: String, required: false, default: 'coverdefault.png' },
 	position: { type: String, required: true },
 	startDate: { type: Date, required: true },
 	location: { type: String, required: true },
@@ -35,9 +32,5 @@ var ProfilSchema = new Schema({
 
 var slug = require('mongoose-friendly-id');
 ProfilSchema.plugin(slug, ['firstName', 'lastName']);
-var Profil = mongoose.model('Profil', ProfilSchema);
 
-module.exports = {
-	Question: Question, 
-	Profil: Profil
-};
+module.exports =  mongoose.model('Profil', ProfilSchema);

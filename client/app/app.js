@@ -9,7 +9,8 @@ angular.module('etixbookApp', [
   'ngSanitize',
   'ui.router',
   'ui.bootstrap',
-  'validation.match'
+  'validation.match',
+  'ui.bootstrap.showErrors'
 ])
   .config(function($urlRouterProvider, $locationProvider) {
     $urlRouterProvider

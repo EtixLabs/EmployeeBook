@@ -2,8 +2,16 @@
 
 angular.module('etixbookApp')
 .config(function ($stateProvider) {
-  $stateProvider.state('profil', {
-    url: '/:slug',
+  $stateProvider
+  .state('create', {
+    url: '/profil/create',
+    templateUrl: 'app/profil/create/create.html',
+    authenticate: false,
+    controller: 'ProfilCreateController',
+    controllerAs: 'profilCreateCtrl'
+  })
+  .state('profil', {
+    url: '/profil/:slug',
     templateUrl: 'app/profil/profil.html',
     authenticate: false,
     controller: 'ProfilController',

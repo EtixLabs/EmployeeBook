@@ -9,7 +9,6 @@
 
 			$http.get('/api/profils/'+$state.params.slug).then(response => {
 				$scope.profil = response.data;
-				console.log($scope.profil);
 			});
 		}
 	}

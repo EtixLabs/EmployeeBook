@@ -44,7 +44,7 @@
     height: 300px;
 }
 
-.profil .flag {
+.flag {
     width: 40px;
     height: 40px;
     display: inline-block;
@@ -68,5 +68,16 @@
 
 .profil dd {
     margin-bottom: 10px;
+}
+
+.form-group.required label:after { 
+   content:"*";
+   color:red;
+}
+
+.tab-content {
+    border: 1px solid #ddd;
+    border-top: none;
+    padding: 20px 25px;
 }
 
