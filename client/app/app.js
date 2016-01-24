@@ -10,7 +10,8 @@ angular.module('etixbookApp', [
   'ui.router',
   'ui.bootstrap',
   'validation.match',
-  'ui.bootstrap.showErrors'
+  'ui.bootstrap.showErrors',
+  'ngTagsInput'
 ])
   .config(function($urlRouterProvider, $locationProvider) {
     $urlRouterProvider

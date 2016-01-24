@@ -41,7 +41,7 @@
 
 .profil .playlist iframe {
     width: 100%;
-    height: 300px;
+    height: 480px;
 }
 
 .flag {
@@ -80,4 +80,50 @@
     border-top: none;
     padding: 20px 25px;
 }
+
+.drop {
+    border: 2px #f1f1f1 dashed;
+    padding: 10px 15px;
+    line-height: 34px;
+    border-radius: 5px;
+    background: #f8f8f8;
+}
+
+tags-input .tags {
+    @extend .form-control;
+    height: 100%;
+}
+
+#movies-input .left-panel {
+    float: left;
+}
+
+#movies-input .left-panel img {
+    width: 48px;
+    height: 68px;
+    vertical-align: middle;
+}
+
+#movies-input .right-panel {
+    float: left;
+    margin-left: 5px;
+    margin-top: 7px;
+    max-width: 80%;
+}
+
+#movies-input .right-panel span:first-child {
+    font-size: 16px;
+}
+
+#movies-input .right-panel span:nth-child(2) {
+    font-size: 14px;
+    color: lightskyblue;
+}
+
+#movies-input .right-panel span:last-child {
+    display: block;
+    font-size: 14px;
+    font-style: italic;
+}
+
 

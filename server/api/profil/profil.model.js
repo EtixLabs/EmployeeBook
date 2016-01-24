@@ -22,7 +22,13 @@ var ProfilSchema = new Schema({
 		location: { type: String, required: true }
 	},
 	interests: { type: String, required: true },
-	movies: { type: [String], required: false },
+	movies: [{ 
+		id : {type: String, required: false},
+		title : {type: String, required: false},
+		poster_path : {type: String, required: false},
+		release_date : {type: String, required: false},
+		overview : {type: String, required: false}
+	}],
 	about: [{
 		question: { type: ObjectId, ref: 'Question' },
 		answer: String
