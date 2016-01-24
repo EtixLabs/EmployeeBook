@@ -132,7 +132,7 @@
 							<input class="form-control" type="text" ng-model="form.about[$index].answer" name="question$index"/>
 						</div>
 					</tab>
-					<tab heading="More" active="true">
+					<tab heading="More">
 						<div class="form-group">
 							<label class="control-label col-sm-2">Interests</label>
 							<div class="col-sm-10">
@@ -164,7 +164,7 @@
 				</tab>
 			</tabset>
 		</form>
-		<pre>{{form.movies | json}}</pre>
+		<pre>{{form | json}}</pre>
 		<pre>{{createForm.$valid | json}}</pre>
 	</div>
 </div>

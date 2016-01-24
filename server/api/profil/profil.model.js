@@ -18,10 +18,10 @@ var ProfilSchema = new Schema({
 	birthday: { type: Date, required: true },
 	languages: { type: [String], required: true },
 	education: { 
-		studies: { type: String, required: true },
-		location: { type: String, required: true }
+		studies: { type: String, required: false },
+		location: { type: String, required: false }
 	},
-	interests: { type: String, required: true },
+	interests: { type: String, required: false },
 	movies: [{ 
 		id : {type: String, required: false},
 		title : {type: String, required: false},

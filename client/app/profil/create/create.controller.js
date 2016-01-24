@@ -6,6 +6,7 @@
 
 		constructor($http, $state, $scope) {
 			this.$http = $http;
+			this.scope = $scope;
 			$scope.form = {};
 
 			$http.get('/api/questions/').then(response => {
@@ -20,8 +21,12 @@
  		}
 
 		submitProfilCreate() {
-			console.log("lol");
-			alert('Submit bro!');
+			console.log("Form submitted");
+			console.log(this.scope.form);
+			this.$http.post('/api/profils', this.scope.form)
+			.then(response => {
+				console.log(response);
+			});
 		}
 
 		loadMovies(query) {
