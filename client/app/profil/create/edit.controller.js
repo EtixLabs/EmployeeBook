@@ -7,8 +7,9 @@
 		constructor($http, $state, $scope) {
 			this.$http = $http;
 			this.scope = $scope;
+			$scope.savebtntitle = "Update";
 			$scope.form = {};
-			this.scope.is_loading = true;
+
 			$http.get('/api/profils/'+$state.params.slug).then(response => {
 				$scope.form = response.data;
 			});
@@ -17,12 +18,18 @@
  		}
 
 		submitProfilCreate() {
-			console.log("Form submitted");
+			console.log("Form submitted for update");
 			console.log(this.scope.form);
-			// this.$http.post('/api/profils', this.scope.form)
-			// .then(response => {
-			// 	console.log(response);
-			// });
+			this.$http.put('/api/profils/'+this.scope.form.slug, this.scope.form)
+			.success(data => {
+				console.log('Sucess');
+				console.log(data);
+			})
+			.catch(err => {
+				//TODO : Handle Error in a nice way
+				console.log('Error');
+				console.log(err);
+			});
 		}
 
 		loadMovies(query) {

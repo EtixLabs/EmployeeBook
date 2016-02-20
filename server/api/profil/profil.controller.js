@@ -87,11 +87,10 @@ exports.update = function(req, res) {
   if (req.body._id) {
     delete req.body._id;
   }
-  Profil.findByIdAsync(req.params.id)
+  Profil.findByFriendlyId(req.params.slug)
     .then(handleEntityNotFound(res))
     .then(saveUpdates(req.body))
-    .then(responseWithResult(res))
-    .catch(handleError(res));
+    .then(responseWithResult(res));
 };
 
 // Deletes a Profil from the DB

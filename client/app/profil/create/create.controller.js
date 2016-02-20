@@ -7,6 +7,7 @@
 		constructor($http, $state, $scope) {
 			this.$http = $http;
 			this.scope = $scope;
+			$scope.savebtntitle = "Save";
 			$scope.form = {};
 
 			$http.get('/api/questions/').then(response => {
@@ -29,11 +30,9 @@
 				console.log(data);
 			})
 			.catch(err => {
+				//TODO : Handle Error in a nice way
 				console.log('Error');
 				console.log(err);
-			})
-			.finally( _ => {
-				console.log('Finally');
 			});
 		}
 
