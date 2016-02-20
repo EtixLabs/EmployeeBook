@@ -120,6 +120,13 @@ Profil.find({}).removeAsync()
       location: 'Bordeaux, France'
     },
     interests: 'Chasse et pêche',
+    movies: [{
+      id: "378772",
+      title: "The-Froze-Nose-Knows",
+      poster_path: "/3xq8sqqqGdyNU49Od7IZDm7u1TS.jpg",
+      release_date: "1970-11-18",
+      overview: "The Aardvark shiveringly pursues the Ant after a snowfall has covered their habitat."
+    }],
     about: [{
       question: questions[0]._id,
       answer: 'Lorem ipsum from db'

@@ -2,19 +2,15 @@
 
 (function() {
 
-	class ProfilCreateController {
+	class ProfilEditController {
 
 		constructor($http, $state, $scope) {
 			this.$http = $http;
 			this.scope = $scope;
 			$scope.form = {};
-
-			$http.get('/api/questions/').then(response => {
-				var questions = response.data;
-				$scope.form.about = [];
-				angular.forEach(questions, function(obj) {
-					$scope.form.about.push({question: obj, answer:""} );
-				});
+			this.scope.is_loading = true;
+			$http.get('/api/profils/'+$state.params.slug).then(response => {
+				$scope.form = response.data;
 			});
 
 			$scope.format = 'dd/MM/yyyy';
@@ -23,18 +19,10 @@
 		submitProfilCreate() {
 			console.log("Form submitted");
 			console.log(this.scope.form);
-			this.$http.post('/api/profils', this.scope.form)
-			.success(data => {
-				console.log('Sucess');
-				console.log(data);
-			})
-			.catch(err => {
-				console.log('Error');
-				console.log(err);
-			})
-			.finally( _ => {
-				console.log('Finally');
-			});
+			// this.$http.post('/api/profils', this.scope.form)
+			// .then(response => {
+			// 	console.log(response);
+			// });
 		}
 
 		loadMovies(query) {
@@ -55,6 +43,6 @@
 	}
 
 	angular.module('etixbookApp')
-	.controller('ProfilCreateController', ProfilCreateController);
+	.controller('ProfilEditController', ProfilEditController);
 
 })();

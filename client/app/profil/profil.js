@@ -7,8 +7,15 @@ angular.module('etixbookApp')
     url: '/profil/create',
     templateUrl: 'app/profil/create/create.html',
     authenticate: false,
-    controller: 'ProfilCreateController',
-    controllerAs: 'profilCreateCtrl'
+    controller: 'ProfilCreateController'
+    // authenticate: 'admin'
+  })
+  .state('edit', {
+    url: '/profil/edit/:slug',
+    templateUrl: 'app/profil/create/edit.html',
+    authenticate: false,
+    controller: 'ProfilEditController'
+    // authenticate: 'admin'
   })
   .state('profil', {
     url: '/profil/:slug',
