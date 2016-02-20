@@ -8,6 +8,7 @@
 			this.$http = $http;
 			this.scope = $scope;
 			$scope.savebtntitle = "Save";
+			$scope.tabIsActive = [{active:true},{active:false},{active:false},{active:false}];
 			$scope.form = {};
 
 			$http.get('/api/questions/').then(response => {

@@ -1,5 +1,5 @@
 <div class="col-sm-4">
-	<div class="panel panel-default">
+	<div class="panel panel-default" ng-show="profil.location">
 		<div class="panel-heading">
 			Location
 			<span class="glyphicon glyphicon-globe pull-right" aria-hidden="true"></span>
@@ -19,7 +19,7 @@
 			<p><span tooltip="{{profil.birthday | date: 'longDate'}}">{{profil.birthday | ageFilter}} years old</span></p>
 		</div>
 	</div>
-	<div class="panel panel-default">
+	<div class="panel panel-default" ng-show="profil.languages.length">
 		<div class="panel-heading">
 			Language
 			<span class="glyphicon glyphicon-comment pull-right" aria-hidden="true"></span>
@@ -28,7 +28,7 @@
 			<span class="flag {{lng}}" ng-repeat="lng in profil.languages"></span>
 		</div>
 	</div>
-	<div class="panel panel-default">
+	<div class="panel panel-default" ng-show="profil.education.length">
 		<div class="panel-heading">
 			Education
 			<span class="glyphicon glyphicon-education pull-right" aria-hidden="true"></span>
@@ -37,7 +37,7 @@
 			{{profil.education.studies}} - <span class="text-primary">{{profil.education.location}}</span>
 		</div>
 	</div>
-	<div class="panel panel-default">
+	<div class="panel panel-default" ng-show="profil.interests">
 		<div class="panel-heading">
 			Interests
 			<span class="glyphicon glyphicon-thumbs-up pull-right" aria-hidden="true"></span>
@@ -46,25 +46,16 @@
 			{{profil.interests}}
 		</div>
 	</div>
-	<!-- <div class="panel panel-default movies" ng-show="profil.movies.length"> -->
-	<div class="panel panel-default movies">
+	<div class="panel panel-default movies" ng-show="profil.movies.length">
 		<div class="panel-heading">
 			Movies
 			<span class="glyphicon glyphicon-film pull-right" aria-hidden="true"></span>
 		</div>
 		<div class="panel-body">
 			<ul class="list-inline">
-				<li>
-					<img src="assets/images/yeoman.png">
-					<span>Movie 1</span>
-				</li>
-				<li>
-					<img src="assets/images/yeoman.png">
-					<span>Movie 2</span>
-				</li>
-				<li>
-					<img src="assets/images/yeoman.png">
-					<span>Movie 3</span>
+				<li ng-repeat="movie in profil.movies">
+					<img src="http://image.tmdb.org/t/p/w45{{movie.poster_path}}" tooltip="{{movie.overview}}" tooltip-placement="right">
+					<span>{{movie.title}}</span>
 				</li>
 			</ul>
 		</div>

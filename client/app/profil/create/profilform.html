@@ -8,7 +8,7 @@
 					{{savebtntitle}}
 				</button>
 				<tabset justified="false">
-					<tab heading="About you">
+					<tab heading="About you" active="tabIsActive[0].active">
 						<div class="form-group required" show-errors>
 							<label class="control-label col-sm-2">First name</label>
 							<div class="col-sm-10">
@@ -90,10 +90,10 @@
 								<input class="form-control" type="text" ng-model="form.education.location" name="education.location" placeholder="Location (eg. Paris, France)"/>
 							</div>
 						</div>
-						<button type="button" class="btn btn-info pull-right">Next</button>
+						<button type="button" class="btn btn-info pull-right" ng-click="tabIsActive[1].active = true">Next</button>
 						<div class="clearfix"></div>
 					</tab>
-					<tab heading="Job">
+					<tab heading="Job" active="tabIsActive[1].active">
 						<div class="form-group required" show-errors>
 							<label class="control-label col-sm-2">Position</label>
 							<div class="col-sm-10">
@@ -113,7 +113,6 @@
 								ng-click="openStartDate=true"
 								is-open="openStartDate"
 								placeholder="15/02/1970"
-								required
 								/>
 							</div>
 						</div>
@@ -129,18 +128,18 @@
 								</select>
 							</div>
 						</div>
-						<button type="button" class="btn btn-info pull-right">Next</button>
+						<button type="button" class="btn btn-info pull-right" ng-click="tabIsActive[2].active = true">Next</button>
 						<div class="clearfix"></div>
 					</tab>
-					<tab heading="Questions">
+					<tab heading="Questions" active="tabIsActive[2].active">
 						<div class="form-group" ng-repeat="q in form.about">
 							<label class="control-label">{{q.question.question}}</label>
 							<input class="form-control" type="text" ng-model="form.about[$index].answer" name="question$index"/>
 						</div>
-						<button type="button" class="btn btn-info pull-right">Next</button>
+						<button type="button" class="btn btn-info pull-right" ng-click="tabIsActive[3].active = true">Next</button>
 						<div class="clearfix"></div>
 					</tab>
-					<tab heading="More">
+					<tab heading="More" active="tabIsActive[3].active">
 						<div class="form-group">
 							<label class="control-label col-sm-2">Interests</label>
 							<div class="col-sm-10">

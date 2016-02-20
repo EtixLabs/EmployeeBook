@@ -8,6 +8,7 @@
 			this.$http = $http;
 			this.scope = $scope;
 			$scope.savebtntitle = "Update";
+			$scope.tabIsActive = [{active:true},{active:false},{active:false},{active:false}];
 			$scope.form = {};
 
 			$http.get('/api/profils/'+$state.params.slug).then(response => {
