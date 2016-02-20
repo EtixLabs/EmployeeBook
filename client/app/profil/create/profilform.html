@@ -88,6 +88,8 @@
 								<input class="form-control" type="text" ng-model="form.education.location" name="education.location" placeholder="Location (eg. Paris, France)"/>
 							</div>
 						</div>
+						<button type="button" class="btn btn-info pull-right">Next</button>
+						<div class="clearfix"></div>
 					</tab>
 					<tab heading="Job">
 						<div class="form-group required" show-errors>
@@ -125,12 +127,16 @@
 								</select>
 							</div>
 						</div>
+						<button type="button" class="btn btn-info pull-right">Next</button>
+						<div class="clearfix"></div>
 					</tab>
 					<tab heading="Questions">
 						<div class="form-group" ng-repeat="q in form.about">
 							<label class="control-label">{{q.question.question}}</label>
 							<input class="form-control" type="text" ng-model="form.about[$index].answer" name="question$index"/>
 						</div>
+						<button type="button" class="btn btn-info pull-right">Next</button>
+						<div class="clearfix"></div>
 					</tab>
 					<tab heading="More">
 						<div class="form-group">
