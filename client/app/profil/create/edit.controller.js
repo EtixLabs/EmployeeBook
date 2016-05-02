@@ -13,6 +13,9 @@
 
 			$http.get('/api/profils/'+$state.params.slug).then(response => {
 				$scope.form = response.data;
+				// Transform dates to js date objects
+				$scope.form.birthday = new Date($scope.form.birthday);
+				$scope.form.startDate = new Date($scope.form.startDate);
 			});
 
 			$scope.format = 'dd/MM/yyyy';
@@ -43,7 +46,7 @@
 					newObj.title = obj.title;
 					newObj.poster_path = obj.poster_path;
 					newObj.release_date = obj.release_date;
-					newObj.overview = obj.overview;					
+					newObj.overview = obj.overview;
 					return newObj;
 				});
 			});
