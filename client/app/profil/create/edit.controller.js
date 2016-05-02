@@ -4,9 +4,11 @@
 
 	class ProfilEditController {
 
-		constructor($http, $state, $scope) {
+		constructor($http, $state, $scope, Upload, $q) {
+			this.$q = $q;
 			this.$http = $http;
 			this.scope = $scope;
+			this.Upload = Upload;
 			$scope.savebtntitle = "Update";
 			$scope.tabIsActive = [{active:true},{active:false},{active:false},{active:false}];
 			$scope.form = {};
@@ -17,22 +19,45 @@
 				$scope.form.birthday = new Date($scope.form.birthday);
 				$scope.form.startDate = new Date($scope.form.startDate);
 			});
-
 			$scope.format = 'dd/MM/yyyy';
  		}
 
 		submitProfilCreate() {
-			console.log("Form submitted for update");
-			console.log(this.scope.form);
+			this.scope.error = false;
+			this.scope.loading = true;
+			// Save form data
 			this.$http.put('/api/profils/'+this.scope.form.slug, this.scope.form)
-			.success(data => {
+			.then(data => {
 				console.log('Sucess');
 				console.log(data);
 			})
+			.then(() => {
+				return this.$q.all([
+					this.scope.form.profilePicture ? this.Upload.upload({
+						url: '/api/profils/upload',
+						data: {
+							file: this.scope.form.profilePicture,
+							type: 'profilePicture',
+							user: this.scope.form.slug
+						}
+					}) : this.$q.resolve(),
+					this.scope.form.coverPhoto ? this.Upload.upload({
+						url: '/api/profils/upload',
+						data: {
+							file: this.scope.form.coverPhoto,
+							type: 'coverPhoto',
+							user: this.scope.form.slug
+						}
+					}) : this.$q.resolve()
+				]);
+			})
 			.catch(err => {
+				this.scope.error = true;
 				//TODO : Handle Error in a nice way
 				console.log('Error');
 				console.log(err);
+			}).finally(() => {
+				this.scope.loading = false;
 			});
 		}
 

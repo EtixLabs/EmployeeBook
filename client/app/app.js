@@ -11,7 +11,8 @@ angular.module('etixbookApp', [
   'ui.bootstrap',
   'validation.match',
   'ui.bootstrap.showErrors',
-  'ngTagsInput'
+  'ngTagsInput',
+  'ngFileUpload'
 ])
   .config(function($urlRouterProvider, $locationProvider) {
     $urlRouterProvider

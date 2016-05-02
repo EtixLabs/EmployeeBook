@@ -100,3 +100,7 @@ exports.destroy = function(req, res) {
     .then(removeEntity(res))
     .catch(handleError(res));
 };
+
+exports.upload = function(req, res) {
+  res.json({file: req.file, body: req.body});
+};
