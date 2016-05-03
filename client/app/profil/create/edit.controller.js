@@ -27,9 +27,9 @@
 			this.scope.loading = true;
 			// Save form data
 			this.$http.put('/api/profils/'+this.scope.form.slug, this.scope.form)
-			.then(data => {
+			.then(res => {
 				console.log('Sucess');
-				console.log(data);
+				this.scope.form = res.data;
 			})
 			.then(() => {
 				return this.$q.all([

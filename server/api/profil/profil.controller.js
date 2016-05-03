@@ -90,7 +90,8 @@ exports.update = function(req, res) {
   Profil.findByFriendlyId(req.params.slug)
     .then(handleEntityNotFound(res))
     .then(saveUpdates(req.body))
-    .then(responseWithResult(res));
+    .then(responseWithResult(res))
+    .catch(handleError(res));
 };
 
 // Deletes a Profil from the DB
