@@ -22,9 +22,32 @@
 			$scope.format = 'dd/MM/yyyy';
  		}
 
+ 		// Returns true if the given file is a file to be uploaded (File object)
+ 		isFileUpload(file) {
+ 			return angular.isObject(file);
+ 		}
+
 		submitProfilCreate() {
 			this.scope.error = false;
 			this.scope.loading = true;
+
+			// Create array of uploads queries (will be then passed to Upload.upload())
+			let uploads = [];
+			['image', 'cover'].forEach(type => {
+				if (this.isFileUpload(this.scope.form[type])) {
+					uploads.push({
+						url: '/api/profils/upload',
+						data: {
+							type,
+							file: this.scope.form[type],
+							user: this.scope.form._id
+						}
+					});
+					// Remove from form (sent separately)
+					delete this.scope.form[type];
+				}
+			});
+
 			// Save form data
 			this.$http.put('/api/profils/'+this.scope.form.slug, this.scope.form)
 			.then(res => {
@@ -32,24 +55,13 @@
 				this.scope.form = res.data;
 			})
 			.then(() => {
-				return this.$q.all([
-					this.scope.form.profilePicture ? this.Upload.upload({
-						url: '/api/profils/upload',
-						data: {
-							file: this.scope.form.profilePicture,
-							type: 'profilePicture',
-							user: this.scope.form.slug
-						}
-					}) : this.$q.resolve(),
-					this.scope.form.coverPhoto ? this.Upload.upload({
-						url: '/api/profils/upload',
-						data: {
-							file: this.scope.form.coverPhoto,
-							type: 'coverPhoto',
-							user: this.scope.form.slug
-						}
-					}) : this.$q.resolve()
-				]);
+				return this.$q.all(uploads.map(this.Upload.upload));
+			})
+			.then(results => {
+				results.forEach(result => {
+					let imgType = result.config.data.type;
+					this.scope.form[imgType] = result.data[imgType];
+				});
 			})
 			.catch(err => {
 				this.scope.error = true;
