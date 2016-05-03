@@ -12,6 +12,9 @@
 var _ = require('lodash');
 var Question = require('../question/question.model');
 var Profil = require('./profil.model');
+var lwip = require('lwip');
+var fs = require('fs');
+var path = require('path');
 
 function handleError(res, statusCode) {
   statusCode = statusCode || 500;
@@ -90,7 +93,8 @@ exports.update = function(req, res) {
   Profil.findByFriendlyId(req.params.slug)
     .then(handleEntityNotFound(res))
     .then(saveUpdates(req.body))
-    .then(responseWithResult(res));
+    .then(responseWithResult(res))
+    .catch(handleError(res));
 };
 
 // Deletes a Profil from the DB
@@ -99,4 +103,85 @@ exports.destroy = function(req, res) {
     .then(handleEntityNotFound(res))
     .then(removeEntity(res))
     .catch(handleError(res));
+};
+
+// Upload a profile picture or cover photo
+exports.upload = function(req, res) {
+  if (!req.body.type || !req.body.user || !req.file) {
+    res.status(400).send({
+      message: 'Missing field'
+    });
+    return;
+  }
+
+  if (req.file.mimetype !== 'image/jpeg') {
+    res.status(400).send({
+      message: 'Invalid image. Only support jpeg'
+    });
+    return;
+  }
+
+  let user = null;
+  let previousImage = null;
+  let imgSize = {
+    'image': [320, 320],
+    'cover': [748, 300]
+  }[req.body.type];
+
+  Profil.findByIdAsync(req.body.user)
+    .then(handleEntityNotFound(res))
+    .then(dbUser => {
+      // Save user into parent scope for easier access
+      user = dbUser;
+
+      // Process image
+      return new Promise((resolve, reject) => {
+        lwip.open(req.file.path, 'jpg', function (err, image) {
+          if (err) {
+            reject(err);
+            return;
+          }
+
+          let processedImage = req.file.path + '.jpg';
+
+          image.batch()
+            .cover(imgSize[0], imgSize[1])
+            .writeFile(processedImage, function (err) {
+              if (err) {
+                reject(err);
+                return;
+              }
+              resolve(processedImage);
+            });
+        });
+      });
+    })
+    .then(processedImage => {
+      // If user already had an image, keep it to clean at the end
+      if (user[req.body.type]) {
+        previousImage = user[req.body.type];
+      }
+
+      // Save image name to user
+      user[req.body.type] = processedImage;
+      return user.saveAsync()
+        .spread(function(updated) {
+          return updated;
+        });
+    })
+    .then(responseWithResult(res))
+    .catch(handleError(res))
+    .finally(() => {
+      // Remove original images
+      if (req.file) {
+        fs.unlink(req.file.path, (err) => {
+          // Not a big deal...
+        });
+      }
+      if (previousImage) {
+        fs.unlink(previousImage, (err) => {
+          // ...
+        });
+      }
+    });
 };

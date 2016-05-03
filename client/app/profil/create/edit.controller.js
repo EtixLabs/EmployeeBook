@@ -4,9 +4,11 @@
 
 	class ProfilEditController {
 
-		constructor($http, $state, $scope) {
+		constructor($http, $state, $scope, Upload, $q) {
+			this.$q = $q;
 			this.$http = $http;
 			this.scope = $scope;
+			this.Upload = Upload;
 			$scope.savebtntitle = "Update";
 			$scope.tabIsActive = [{active:true},{active:false},{active:false},{active:false}];
 			$scope.form = {};
@@ -17,22 +19,57 @@
 				$scope.form.birthday = new Date($scope.form.birthday);
 				$scope.form.startDate = new Date($scope.form.startDate);
 			});
-
 			$scope.format = 'dd/MM/yyyy';
  		}
 
+ 		// Returns true if the given file is a file to be uploaded (File object)
+ 		isFileUpload(file) {
+ 			return angular.isObject(file);
+ 		}
+
 		submitProfilCreate() {
-			console.log("Form submitted for update");
-			console.log(this.scope.form);
+			this.scope.error = false;
+			this.scope.loading = true;
+
+			// Create array of uploads queries (will be then passed to Upload.upload())
+			let uploads = [];
+			['image', 'cover'].forEach(type => {
+				if (this.isFileUpload(this.scope.form[type])) {
+					uploads.push({
+						url: '/api/profils/upload',
+						data: {
+							type,
+							file: this.scope.form[type],
+							user: this.scope.form._id
+						}
+					});
+					// Remove from form (sent separately)
+					delete this.scope.form[type];
+				}
+			});
+
+			// Save form data
 			this.$http.put('/api/profils/'+this.scope.form.slug, this.scope.form)
-			.success(data => {
+			.then(res => {
 				console.log('Sucess');
-				console.log(data);
+				this.scope.form = res.data;
+			})
+			.then(() => {
+				return this.$q.all(uploads.map(this.Upload.upload));
+			})
+			.then(results => {
+				results.forEach(result => {
+					let imgType = result.config.data.type;
+					this.scope.form[imgType] = result.data[imgType];
+				});
 			})
 			.catch(err => {
+				this.scope.error = true;
 				//TODO : Handle Error in a nice way
 				console.log('Error');
 				console.log(err);
+			}).finally(() => {
+				this.scope.loading = false;
 			});
 		}
 

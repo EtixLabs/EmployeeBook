@@ -21,7 +21,7 @@
     text-shadow: 0 0 3px rgba(0,0,0,.8);
 }
 
-@media (min-width: 768px) { 
+@media (min-width: 768px) {
     .profil .profil-picture {
         margin-top: 110px;
     }
@@ -70,7 +70,7 @@
     margin-bottom: 10px;
 }
 
-.form-group.required label:after { 
+.form-group.required label:after {
    content:"*";
    color:red;
 }
@@ -87,6 +87,10 @@
     line-height: 34px;
     border-radius: 5px;
     background: #f8f8f8;
+}
+
+.drop.dragover {
+    border-color: blue;
 }
 
 tags-input .tags {
@@ -125,5 +129,3 @@ tags-input .tags {
     font-size: 14px;
     font-style: italic;
 }
-
-
