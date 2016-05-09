@@ -3,7 +3,7 @@
 
 angular.module('etixbookApp.constants', [])
 
-.constant('appConfig', {userRoles:['guest','user','admin']})
+.constant('appConfig', {userRoles:['guest','user','admin'],ldap:{}})
 
 ;
 })(angular);

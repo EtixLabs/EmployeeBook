@@ -9,7 +9,6 @@ var router = express.Router();
 
 router.get('/', controller.index);
 router.get('/:slug', controller.show);
-router.post('/', controller.create);
 router.put('/:slug', controller.update);
 router.post('/upload', upload.single('file'), controller.upload);
 // router.patch('/:id', controller.update);

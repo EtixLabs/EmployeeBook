@@ -1,7 +1,6 @@
 /**
  * Using Rails-like standard naming convention for endpoints.
  * GET     /api/profils              ->  index
- * POST    /api/profils              ->  create
  * GET     /api/profils/:id          ->  show
  * PUT     /api/profils/:id          ->  update
  * DELETE  /api/profils/:id          ->  destroy
@@ -76,13 +75,6 @@ exports.show = function(req, res) {
     .populate('about.question')
     .then(handleEntityNotFound(res))
     .then(responseWithResult(res));
-};
-
-// Creates a new Profil in the DB
-exports.create = function(req, res) {
-  Profil.createAsync(req.body)
-    .then(responseWithResult(res, 201))
-    .catch(handleError(res));
 };
 
 // Updates an existing Profil in the DB

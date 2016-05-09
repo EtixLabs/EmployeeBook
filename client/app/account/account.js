@@ -20,19 +20,6 @@ angular.module('etixbookApp')
       Auth.logout();
       $state.go(referrer);
     }
-  })
-  .state('signup', {
-    url: '/signup',
-    templateUrl: 'app/account/signup/signup.html',
-    controller: 'SignupController',
-    controllerAs: 'vm'
-  })
-  .state('settings', {
-    url: '/settings',
-    templateUrl: 'app/account/settings/settings.html',
-    controller: 'SettingsController',
-    controllerAs: 'vm',
-    authenticate: true
   });
 })
 .run(function($rootScope, Auth, $state) {
@@ -42,7 +29,7 @@ angular.module('etixbookApp')
     }
     if (next.authenticate && !Auth.isLoggedIn()){
       $state.transitionTo("login");
-      event.preventDefault(); 
+      event.preventDefault();
     }
   });
 });

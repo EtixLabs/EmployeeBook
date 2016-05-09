@@ -14,9 +14,7 @@ var UserSchema = new Schema({
     type: String,
     default: 'user'
   },
-  password: String,
-  provider: String,
-  salt: String
+  slugname: String
 });
 
 /**
@@ -53,13 +51,6 @@ UserSchema
   .validate(function(email) {
     return email.length;
   }, 'Email cannot be blank');
-
-// Validate empty password
-UserSchema
-  .path('password')
-  .validate(function(password) {
-    return password.length;
-  }, 'Password cannot be blank');
 
 // Validate email is not taken
 UserSchema

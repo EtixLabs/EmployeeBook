@@ -7,52 +7,10 @@
  import User from '../api/user/user.model';
  import Question from '../api/question/question.model';
  import Profil from '../api/profil/profil.model';
+ import questions from './questions.js';
 
- User.find({}).removeAsync()
- .then(function() {
-  User.createAsync({
-    provider: 'local',
-    name: 'Test User',
-    email: 'test@example.com',
-    password: 'test'
-  }, {
-    provider: 'local',
-    role: 'admin',
-    name: 'Admin',
-    email: 'admin@example.com',
-    password: 'admin'
-  })
-  .then(function() {
-    console.log('finished populating users');
-  });
-});
-
-var questions = [
-  new Question({
-    question: 'Your motto ?'
-  }),
-  new Question({
-    question: 'Your personal dream ?'
-  }),
-  new Question({
-    question: 'Can you cook ? Any specialty ?'
-  }),
-  new Question({
-    question: 'What about your family ?'
-  }),
-  new Question({
-    question: 'Any Super Power ?'
-  }),
-  new Question({
-    question: 'If you had the chance to meet a famous person who would he/she be ?'
-  }),
-  new Question({
-    question: 'Which 3 questions would you ask him/her ?'
-  }),
-  new Question({
-    question: 'Best trip ever ?'
-  })
- ];
+// No users seed, use LDAP
+ User.find({}).removeAsync();
 
 Question.find({}).removeAsync()
 .then(function() {
@@ -65,6 +23,7 @@ Question.find({}).removeAsync()
 Profil.find({}).removeAsync()
 .then(function() {
   Profil.createAsync({
+    email: 'anas.aitali@etixgroup.com',
     firstName: 'Anas',
     lastName: 'Ait Ali',
     nickname: 'Prophete',
@@ -106,6 +65,7 @@ Profil.find({}).removeAsync()
     }],
     playlist: '<iframe src="https://embed.spotify.com/?uri=spotify%3Auser%3Aspotify_france%3Aplaylist%3A6dBHkT4MaNoBhsQhC1bz4P" width="300" height="380" frameborder="0" allowtransparency="true"></iframe>'
   }, {
+    email: 'jeremy.letang@etixgroup.com',
     firstName: 'Jérémy',
     lastName: 'Letang',
     nickname: 'Balek',
