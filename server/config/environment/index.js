@@ -39,6 +39,12 @@ var all = {
         safe: true
       }
     }
+  },
+
+  // Ldap connection options
+  ldap: {
+    user: process.env.ETIX_LDAP_USER,
+    password: process.env.ETIX_LDAP_PASSWORD
   }
 };
 
