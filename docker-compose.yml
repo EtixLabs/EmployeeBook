@@ -1,0 +1,15 @@
+mongodb:
+  image: mongo:3.3
+
+etixbook:
+  build: .
+  environment:
+    ETIX_LDAP_USER: ''
+    ETIX_LDAP_PASSWORD: ''
+    MONGOLAB_URI: mongodb://mongodb/etixbook
+  volumes:
+    - ./uploads:/usr/src/app/uploads
+  ports:
+    - 80:8080
+  links:
+    - mongodb

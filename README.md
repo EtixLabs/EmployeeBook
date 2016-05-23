@@ -30,3 +30,19 @@ Run `grunt build` for building and `grunt serve` for preview.
 ## Testing
 
 Running `npm test` will run the unit tests with karma.
+
+## Deployment
+
+To build the app for production, run:
+
+```
+grunt build
+```
+
+This will create a nodejs package in the `dist/` folder.
+
+Then, to deploy the app using docker, simply run:
+
+```
+docker-compose up
+```
